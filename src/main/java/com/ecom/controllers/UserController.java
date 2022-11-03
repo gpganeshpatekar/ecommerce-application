@@ -2,6 +2,8 @@ package com.ecom.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class UserController {
 	
 //	to create new user
 	@PostMapping(value = "/",consumes = "application/json",produces = "application/json")
-	public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto){
+	public ResponseEntity<UserDto> saveUser(@Valid @RequestBody UserDto userDto){
 		userDto.setActive(true);
 		UserDto save = this.userService.create(userDto);
 		return new ResponseEntity<UserDto>(save,HttpStatus.CREATED);
@@ -52,7 +54,7 @@ public class UserController {
 	}
 //	to update user
 	@PutMapping (value = "/{userId}",consumes = "application/json",produces = "application/json")
-	public ResponseEntity<UserDto> updateUser(@PathVariable("userId") Integer userId,@RequestBody UserDto userDto){
+	public ResponseEntity<UserDto> updateUser(@Valid @PathVariable("userId") Integer userId,@RequestBody UserDto userDto){
 		UserDto update = this.userService.update(userId, userDto);
 		return new ResponseEntity<UserDto>(update,HttpStatus.OK);
 	}
