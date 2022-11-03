@@ -15,14 +15,14 @@ public class UserDto {
 	
 	
 	private Integer userId;
-	@NotEmpty(message = "name can't be blank")
+	@NotEmpty
 	@Size(min = 4, max = 20, message = "name must be min of 4 characters and max of 20 characters")
 	private String name;
 	// consider email as user name
 	@Email
 	@Pattern(regexp = "[a-zA-Z0-9][a-zA-Z0-9_.]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+",message = "valid email id is required")
 	private String email;
-	@NotEmpty(message = "password can't be blank")
+	@NotEmpty
 	@Size(min = 6,message = "password must be min of 6 characters")
 	private String password;
 	@NotEmpty

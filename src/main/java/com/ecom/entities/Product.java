@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -51,6 +53,10 @@ public class Product {
 	
 	@Column(name = "product_image")
 	private String productImage;
+	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
 	@CreationTimestamp
 	@Column(name = "created_date", updatable = false)
