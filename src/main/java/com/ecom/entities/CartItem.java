@@ -29,7 +29,7 @@ public class CartItem {
 	@ManyToOne
 	private Cart cart;
 
-	public void setTotalProductPrice(double totalProductPrice) {
+	public void setTotalProductPrice() {
 		this.totalProductPrice = this.product.getProductPrice() * this.productQuantity;
 	}
 	

@@ -46,7 +46,7 @@ public class Product {
 	private Integer productQty;
 	
 	@Column(name = "live_status")
-	private boolean liveStatus;
+	private boolean liveStatus=true;
 	
 	@Column(name = "stock_status")
 	private boolean stockStatus = true;

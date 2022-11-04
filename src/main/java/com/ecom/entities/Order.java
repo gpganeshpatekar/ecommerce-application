@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,7 +38,7 @@ public class Order {
 	
 	private Date orderDelivered;
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
 	private Set<OrderItem> items = new HashSet<>();
 	
 	@OneToOne

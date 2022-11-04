@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,6 +40,8 @@ public class User {
 	private String gender;
 	private String phone;
 	private boolean active = true;
+	@OneToOne(mappedBy = "user")
+	private Cart cart;
 	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDate createdDate;
