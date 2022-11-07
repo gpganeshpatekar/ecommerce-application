@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,7 @@ public class ProductController {
 	private ProductService productService;
 
 //	to create new product
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "categories/{categoryId}/products/",consumes = "application/json",produces = "application/json")
 	public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto, @PathVariable Integer categoryId) {
 		ProductDto saveProduct = this.productService.createProduct(productDto,categoryId);
@@ -83,6 +85,7 @@ public class ProductController {
 
 	}
 //	to update product
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping(value = "/products/{productId}",consumes = "application/json",produces = "application/json")
 	public ResponseEntity<ProductDto> updateProduct(@PathVariable Integer productId,@RequestBody ProductDto productDto) {
 		ProductDto updateProduct = this.productService.updateProduct(productId, productDto);
@@ -90,6 +93,7 @@ public class ProductController {
 
 	}
 //	to  delete product
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping(value = "/products/{productId}", produces = "application/json")
 	public ResponseEntity<ApiResponse> deleteProduct(@PathVariable Integer productId) {
 			this.productService.deleteProduct(productId);

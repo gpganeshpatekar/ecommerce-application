@@ -1,10 +1,16 @@
 package com.ecom.payload;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,5 +40,22 @@ public class UserDto {
 	private String phone;
 	private boolean active;
 
+	private Set<RoleDto> roles = new HashSet<>();
+
+	@JsonIgnore // password won't get
+	public String getPassword() {
+		return password;
+	}
+
+	@JsonProperty // but you can set password
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
+	
+	
+	
+	
 
 }

@@ -6,6 +6,10 @@ public class AppConstants {
 	public static final String PAGE_SIZE = "5";
 	public static final String SORT_BY = "productId";
 	public static final String SORT_DIR = "asc";
+
+	// security
+	public static String[] PUBLIC_URLS = { "/users/","/auth/login" };
+	
 	
 	
 	

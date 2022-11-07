@@ -37,10 +37,10 @@ public class CartServiceImpl implements CartService {
 	private ProductRepository productRepository;
 
 	@Override
-	public CartDto addItem(ItemRequest item, String userName) {
+	public CartDto addItem(ItemRequest item, String username) {
 		// to get the user 
-		User user = this.userRepository.findByEmail(userName)
-				.orElseThrow(() -> new ResourceNotFoundException("user not found with username : " + userName));
+		User user = this.userRepository.findByEmail(username)
+				.orElseThrow(() -> new ResourceNotFoundException("user not found with username : " + username));
 		//
 		Integer productId = item.getProductId();
 		Integer productQuantity = item.getProductQuantity();
@@ -98,18 +98,18 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartDto getCart(String userName) {
-		User user = this.userRepository.findByEmail(userName)
-				.orElseThrow(() -> new ResourceNotFoundException("user not found with username : " + userName));
+	public CartDto getCart(String username) {
+		User user = this.userRepository.findByEmail(username)
+				.orElseThrow(() -> new ResourceNotFoundException("user not found with username : " + username));
 		Cart cart = this.cartRepository.findByUser(user)
-				.orElseThrow(() -> new ResourceNotFoundException("cart not found with username : " + userName));
+				.orElseThrow(() -> new ResourceNotFoundException("cart not found with username : " + username));
 		return this.modelMapper.map(cart, CartDto.class);
 	}
 
 	@Override
-	public CartDto removeItem(String userName, Integer productId) {
-		User user = this.userRepository.findByEmail(userName)
-				.orElseThrow(() -> new ResourceNotFoundException("user not found with username : " + userName));
+	public CartDto removeItem(String username, Integer productId) {
+		User user = this.userRepository.findByEmail(username)
+				.orElseThrow(() -> new ResourceNotFoundException("user not found with username : " + username));
 		Cart cart = user.getCart();
 		Set<CartItem> items = cart.getItems();
 		boolean result = items.removeIf((item)->item.getProduct().getProductId()==productId);

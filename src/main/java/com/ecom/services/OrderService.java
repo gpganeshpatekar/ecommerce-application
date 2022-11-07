@@ -9,7 +9,7 @@ public interface OrderService {
 	
 //	create order
 	
-	OrderDto createOrder(OrderRequest orderRequest,String userName);
+	OrderDto createOrder(OrderRequest orderRequest,String username);
 //	get all order
 	List<OrderDto> getAllOrders();
 //	get single order

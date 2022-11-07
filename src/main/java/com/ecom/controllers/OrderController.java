@@ -1,8 +1,12 @@
 package com.ecom.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +23,24 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	String userName = "virat@gmail.com";
-	
-	@PostMapping("/")
-	public ResponseEntity<OrderDto> createOrder(@RequestBody OrderRequest orderRequest){
-		OrderDto createOrder = this.orderService.createOrder(orderRequest, userName);
+	@PostMapping(value = "/{username}", consumes = "application/json",produces = "application/json")
+	public ResponseEntity<OrderDto> createOrder(@RequestBody OrderRequest orderRequest, @PathVariable String username){
+		OrderDto createOrder = this.orderService.createOrder(orderRequest, username);
 		return new ResponseEntity<OrderDto>(createOrder,HttpStatus.CREATED);
 	}
+	
+	@GetMapping(value = "/",produces = "application/json")
+	public ResponseEntity<List<OrderDto>> getAllOrders(){
+		List<OrderDto> orders = this.orderService.getAllOrders();
+		return new ResponseEntity<List<OrderDto>>(orders,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{orderId}",produces = "application/json")
+	public ResponseEntity<OrderDto> getOrderByOrderId(@PathVariable Integer orderId){
+		OrderDto order = this.orderService.getOrder(orderId);
+		return new ResponseEntity<OrderDto>(order,HttpStatus.OK);
+	}
+	
+	
 
 }

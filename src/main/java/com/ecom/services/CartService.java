@@ -10,12 +10,12 @@ public interface CartService {
 	// if the cart is available then we will add items to the cart
 	// if the cart is not available then create cart
 	
-	CartDto addItem(ItemRequest item, String userName);
+	CartDto addItem(ItemRequest item, String username);
 	
-	public CartDto getCart(String userName);
+	public CartDto getCart(String username);
 	
 	// remove items from cart
-	CartDto removeItem(String userName,Integer productId);
+	CartDto removeItem(String username,Integer productId);
 	
 
 }

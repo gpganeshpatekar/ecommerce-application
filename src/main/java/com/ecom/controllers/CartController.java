@@ -21,23 +21,22 @@ public class CartController {
 
 	@Autowired
 	private CartService cartService;
-	String userName = "virat@gmail.com";
-//	String userName = "rohit@gmail.com";
+	
 	@PostMapping(value = "/",consumes = "application/json",produces = "application/json" )
-	public ResponseEntity<CartDto> addItemToCart(@RequestBody ItemRequest request){
-		CartDto addItem = this.cartService.addItem(request, userName);
+	public ResponseEntity<CartDto> addItemToCart(@RequestBody ItemRequest request,String username){
+		CartDto addItem = this.cartService.addItem(request, username);
 		return new ResponseEntity<CartDto>(addItem,HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/",produces = "application/json")
-	public ResponseEntity<CartDto> getCart(){
-		CartDto cartDto = this.cartService.getCart(userName);
+	@GetMapping(value = "/{username}",produces = "application/json")
+	public ResponseEntity<CartDto> getCart(String username){
+		CartDto cartDto = this.cartService.getCart(username);
 		return new ResponseEntity<CartDto>(cartDto,HttpStatus.OK);
 	}
 	
 	@PutMapping("/{productId}")
-	public ResponseEntity<CartDto> removeProductFromCart(@PathVariable Integer productId){
-		CartDto removeItem = this.cartService.removeItem(userName, productId);
+	public ResponseEntity<CartDto> removeProductFromCart(@PathVariable Integer productId,String username){
+		CartDto removeItem = this.cartService.removeItem(username, productId);
 		return new ResponseEntity<CartDto>(removeItem,HttpStatus.OK);
 	}
 }

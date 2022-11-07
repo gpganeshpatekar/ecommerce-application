@@ -8,6 +8,7 @@ import org.hibernate.criterion.Example;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,6 +24,13 @@ public class GlobalExceptionHandler {
 		ApiResponse apiResponse = new ApiResponse(ex.getMessage(),false);
 		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<ApiResponse> handleBadCredentialsException(BadCredentialsException ex){
+		ApiResponse apiResponse = new ApiResponse(ex.getMessage(),false);
+		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.BAD_REQUEST);
+	}
+
 	
 	
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)

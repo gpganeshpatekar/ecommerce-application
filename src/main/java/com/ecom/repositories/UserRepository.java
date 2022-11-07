@@ -13,7 +13,7 @@ import com.ecom.payload.UserDto;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-	
+	// important method
 	public Optional<User> findByEmail(String email);
 	public List<User> findByName(String name);
 	public User findByEmailAndPassword(String email,String password);

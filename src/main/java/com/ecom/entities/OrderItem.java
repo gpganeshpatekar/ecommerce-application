@@ -17,7 +17,7 @@ public class OrderItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer orderid;
+	private Integer orderItemId;
 	
 	@OneToOne
 	private Product product;
