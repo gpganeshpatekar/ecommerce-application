@@ -1,5 +1,7 @@
 package com.ecom.controllers;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,20 +25,20 @@ public class CartController {
 	private CartService cartService;
 	
 	@PostMapping(value = "/",consumes = "application/json",produces = "application/json" )
-	public ResponseEntity<CartDto> addItemToCart(@RequestBody ItemRequest request,String username){
-		CartDto addItem = this.cartService.addItem(request, username);
+	public ResponseEntity<CartDto> addItemToCart(@RequestBody ItemRequest request, Principal principal){
+		CartDto addItem = this.cartService.addItem(request, principal.getName());
 		return new ResponseEntity<CartDto>(addItem,HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{username}",produces = "application/json")
-	public ResponseEntity<CartDto> getCart(String username){
-		CartDto cartDto = this.cartService.getCart(username);
+	public ResponseEntity<CartDto> getCart(Principal principal){
+		CartDto cartDto = this.cartService.getCart(principal.getName());
 		return new ResponseEntity<CartDto>(cartDto,HttpStatus.OK);
 	}
 	
 	@PutMapping("/{productId}")
-	public ResponseEntity<CartDto> removeProductFromCart(@PathVariable Integer productId,String username){
-		CartDto removeItem = this.cartService.removeItem(username, productId);
+	public ResponseEntity<CartDto> removeProductFromCart(@PathVariable Integer productId,Principal principal){
+		CartDto removeItem = this.cartService.removeItem(principal.getName(), productId);
 		return new ResponseEntity<CartDto>(removeItem,HttpStatus.OK);
 	}
 }

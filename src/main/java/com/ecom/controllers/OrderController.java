@@ -1,5 +1,6 @@
 package com.ecom.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@PostMapping(value = "/{username}", consumes = "application/json",produces = "application/json")
-	public ResponseEntity<OrderDto> createOrder(@RequestBody OrderRequest orderRequest, @PathVariable String username){
-		OrderDto createOrder = this.orderService.createOrder(orderRequest, username);
+	@PostMapping(value = "/{principal}", consumes = "application/json",produces = "application/json")
+	public ResponseEntity<OrderDto> createOrder(@RequestBody OrderRequest orderRequest, @PathVariable Principal principal){
+		OrderDto createOrder = this.orderService.createOrder(orderRequest, principal.getName());
 		return new ResponseEntity<OrderDto>(createOrder,HttpStatus.CREATED);
 	}
 	
